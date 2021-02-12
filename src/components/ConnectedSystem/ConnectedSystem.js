@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,14 +22,77 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ConnectedSystem(props) {
+  const [state, setState] = useState({
+    checkedA: false,
+    checkedB: false,
+    checkedC: false,
+    checkedD: false,
+  });
+
   const classes = useStyles();
 
+  function handleChange(event) {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  }
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id={props.systemName}>
       <Grid container spacing={1}>
-        <Grid item xs={4}>
-          <div id={props.systemName}>{props.systemName}</div>
-        </Grid>
+        <Paper className={classes.paper}>
+          <Grid item xs={6}>
+            <div>{props.systemName}</div>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedA}
+                    onChange={handleChange}
+                    name="checkedA"
+                    color="primary"
+                    value="System1"
+                  />
+                }
+                label="System1"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedB}
+                    onChange={handleChange}
+                    name="checkedB"
+                    color="primary"
+                    value="System2"
+                  />
+                }
+                label="System2"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedC}
+                    onChange={handleChange}
+                    name="checkedC"
+                    color="primary"
+                    value="System3"
+                  />
+                }
+                label="System3"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedD}
+                    onChange={handleChange}
+                    name="checkedD"
+                    color="primary"
+                    value="System4"
+                  />
+                }
+                label="System4"
+              />
+            </FormGroup>
+          </Grid>
+        </Paper>
       </Grid>
     </div>
   );

@@ -9,7 +9,7 @@ import Header from "../Header/Header";
 import Progress from "../ProgressBar/ProgressBar";
 import SaveContinue from "../SaveContinue/SaveContinue";
 import SystemList from "../SystemsList/SystemList";
-import ConnectedSystem from "../ConnectedSystem/ConnectedSystem"
+import ConnectedSystem from "../ConnectedSystem/ConnectedSystem";
 
 // import "./ConnectSystems.css";
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 function ConnectSystems() {
   const [systemToRender, setSystemToRender] = useState([]);
 
-  function onChange(systems){
+  function onChange(systems) {
     setSystemToRender(systems);
   }
 
@@ -52,18 +52,21 @@ function ConnectSystems() {
             alignItems="flex-start"
           >
             <Grid item xs={6}>
-              <div>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="flex-start"
+              >
                 {systemToRender.map((system) => {
-                  return (
-                    <ConnectedSystem systemName={system}/>
-                  )
+                  return <ConnectedSystem systemName={system} />;
                 })}
-              </div>
+              </Grid>
             </Grid>
 
             <Grid item xs={3}>
               <div>Systems Connected:</div>
-              <SystemList onChange={onChange}/>
+              <SystemList onChange={onChange} />
             </Grid>
           </Grid>
 
