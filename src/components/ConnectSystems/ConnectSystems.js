@@ -2,19 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Header from "../Header/Header";
+import Progress from "../ProgressBar/ProgressBar";
+
 // import "./ConnectSystems.css";
 
 function ConnectSystems() {
   return (
-    <div className="container">
-      <Header />
+    <div>
+      <Header to={"/runAudit"}/>
       Connect Systems
-      <main className="main">
+      <main>
         <div className="SystemstoConnect">Systems Connected:</div>
         <div className="SystemsConnectedContainer">
           <div>ERP</div>
           <div>CRM</div>
         </div>
+        <Progress percent={33} />
+        <button>save</button>
+        <Link to="/chooseControls" style={{ textDecoration: "none" }}>
+          <button>continue</button>
+        </Link>
       </main>
     </div>
   );

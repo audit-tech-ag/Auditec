@@ -1,11 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import "./Header.css";
 
-function Header() {
+function Header(props) {
   return (
-    <div className="container">
-     Auditech
-    </div>
+    // <div className="container">
+    <header>
+      <img src="headerLogo.JPG" />
+      <Link to={props.to}>
+        <button>back</button>
+      </Link>
+    </header>
+    // </div>
   );
 }
 
