@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage";
-import RunAudit from "./components/RunAudit/RunAudit";
-import ConnectSystems from "./components/ConnectSystems/ConnectSystems";
-import ChooseControls from "./components/ChooseControls/ChooseControls";
-import AssignControlsOwners from "./components/AssignControlsOwners/AssignControlsOwners";
-import Review from "./components/Review/Review";
+import RunAudit from "./components/RunAuditPage/RunAuditPage";
+import ConnectSystems from "./components/ConnectSystemsPage/ConnectSystemsPage";
+import ChooseControls from "./components/ChooseControlsPage/ChooseControlsPage";
+import AssignControlsOwners from "./components/AssignControlsOwnersPage/AssignControlsOwnersPage";
+import Review from "./components/ReviewPage/ReviewPage";
 
 import "./App.css";
 

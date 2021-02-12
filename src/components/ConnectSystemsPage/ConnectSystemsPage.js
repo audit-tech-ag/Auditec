@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import Header from "../Header/Header";
 import Progress from "../ProgressBar/ProgressBar";
 import SaveContinue from "../SaveContinue/SaveContinue";
+import SystemList from "../SystemsList/SystemList";
+import ConnectedSystem from "../ConnectedSystem/ConnectedSystem"
 
 // import "./ConnectSystems.css";
 const useStyles = makeStyles((theme) => ({
@@ -26,11 +28,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ConnectSystems() {
+  const [systemToRender, setSystemToRender] = useState([]);
+
+  function onChange(systems){
+    setSystemToRender(systems);
+  }
+
   const classes = useStyles();
 
   return (
     <div>
       <Header to={"/runAudit"} />
+
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -43,24 +52,26 @@ function ConnectSystems() {
             alignItems="flex-start"
           >
             <Grid item xs={6}>
-              <div className="SystemsConnectedContainer">
-                <div>ERP</div>
-                <div>CRM</div>
+              <div>
+                {systemToRender.map((system) => {
+                  return (
+                    <ConnectedSystem systemName={system}/>
+                  )
+                })}
               </div>
             </Grid>
+
             <Grid item xs={3}>
-              <div className="SystemstoConnect">Systems Connected:</div>
+              <div>Systems Connected:</div>
+              <SystemList onChange={onChange}/>
             </Grid>
           </Grid>
 
           <Grid item xs={12}>
             <Progress percent={33} />
           </Grid>
-          {/* <button>save</button>
-          <Link to="/chooseControls" style={{ textDecoration: "none" }}>
-            <button>continue</button>
-          </Link> */}
-          <SaveContinue to={"/chooseControls"}/>
+
+          <SaveContinue to={"/chooseControls"} />
         </Grid>
       </div>
     </div>
