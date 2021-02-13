@@ -11,6 +11,7 @@ import SaveContinue from "../SaveContinue/SaveContinue";
 import SystemList from "../SystemsList/SystemList";
 import ConnectedSystem from "../ConnectedSystem/ConnectedSystem";
 
+
 // import "./ConnectSystems.css";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,20 +30,18 @@ const useStyles = makeStyles((theme) => ({
 
 function ConnectSystems({ onPageSubmitChange }) {
   const [systemsToRender, setsystemsToRender] = useState([]);
-  // const [systemsAndSubSystems, setSystemsAndSubSystems] = useState();
+  const [systemsAndSubSystems, setSystemsAndSubSystems] = useState([]);
 
-  function onChange(systems) {
-    // console.log(systems);
+  function onListChange(systems) {
     setsystemsToRender(systems);
   }
 
-  function onSubmitChange(subSystems) {
-    console.log(subSystems);
-    // setSystemsAndSubSystems({ ...systemsAndSubSystems, subSystems });
-  }
-    // onPageSubmitChange(systemsAndSubSystems);
+  function onSubmit(subSystems) {
+    let subSystemsToSave = subSystems;
 
-  // console.log(systemsAndSubSystems);
+    setSystemsAndSubSystems((prevState) => [...prevState, { subSystems }]);
+    onPageSubmitChange(subSystemsToSave);
+  }
 
   const classes = useStyles();
 
@@ -73,7 +72,7 @@ function ConnectSystems({ onPageSubmitChange }) {
                     <ConnectedSystem
                       key={system}
                       systemName={system}
-                      onSubmitChange={onSubmitChange}
+                      onSubmit={onSubmit}
                     />
                   );
                 })}
@@ -82,7 +81,7 @@ function ConnectSystems({ onPageSubmitChange }) {
 
             <Grid item xs={3}>
               <div>Systems Connected:</div>
-              <SystemList onChange={onChange} />
+              <SystemList onListChange={onListChange} />
             </Grid>
           </Grid>
 

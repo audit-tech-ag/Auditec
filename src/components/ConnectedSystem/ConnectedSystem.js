@@ -6,6 +6,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Paper from "@material-ui/core/Paper";
 
+// import useConnectedSystem from "../../hooks/useConnectedSystems"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -28,20 +30,18 @@ function ConnectedSystem(props) {
     checkedC: false,
     checkedD: false,
   });
-  // const [subSystemsSelected, setSubSystemsSelected] = useState({});
-  const [systemsAndSubSystems, setSystemsAndSubSystems] = useState();
+
+  const [systemsAndSubSystems, setSystemsAndSubSystems] = useState([{}]);
 
   const classes = useStyles();
 
   function handleChange(event) {
     setState({ ...state, [event.target.name]: event.target.checked });
-    console.log(state);
+    let subSystemSave = {};
 
     if (event.target.checked) {
-      setSystemsAndSubSystems({
-        ...systemsAndSubSystems,
-        [props.systemName]: event.target.value,
-      });
+      subSystemSave = { [props.systemName]: event.target.value };
+      setSystemsAndSubSystems((prevState) => [...prevState, subSystemSave]);
     }
     if (!event.target.checked) {
       for (let element in systemsAndSubSystems) {
@@ -52,14 +52,9 @@ function ConnectedSystem(props) {
           setSystemsAndSubSystems(delete systemsAndSubSystems[element]);
         }
       }
-      // setSubSystemsSelected();
     }
-    //  props.onSubmitChange(subSystemsSelected);
-    // setSystemsAndSubSystems(...systemsAndSubSystems, )
+    props.onSubmit(subSystemSave);
   }
-  console.log(systemsAndSubSystems);
-
-  // props.onSubmitChange(subSystemsSelected);
 
   return (
     <div className={classes.root} id={props.systemName}>

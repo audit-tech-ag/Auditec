@@ -13,11 +13,10 @@ function App() {
   const [connectedSystems, setConnectedSystems] = useState([]);
 
   function onPageSubmitChange(systemsAndSubSystems) {
-    console.log(systemsAndSubSystems)
-    // setConnectedSystems((prevState) => [...prevState, systemsAndSubSystems]);
+    setConnectedSystems((prevState) => [...prevState, systemsAndSubSystems]);
   }
 
-  // console.log(connectedSystems);
+  console.log(connectedSystems);
 
   return (
     <div>

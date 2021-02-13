@@ -20,7 +20,7 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 //   checked: {},
 // })((props) => <Checkbox color="default" {...props} />);
 
-function SystemList({ onChange }) {
+function SystemList({ onListChange }) {
   const [state, setState] = useState({
     checkedA: false,
     checkedB: false,
@@ -43,7 +43,7 @@ function SystemList({ onChange }) {
     }
   }
 
-  onChange(systemToRender);
+  onListChange(systemToRender);
 
   return (
     <FormGroup>
