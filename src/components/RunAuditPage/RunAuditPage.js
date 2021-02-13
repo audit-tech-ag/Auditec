@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
 import Header from "../Header/Header";
-import Progress from "../ProgressBar/ProgressBar";
+import ProgressBar from "../ProgressBar/ProgressBar";
 // import Grid from "../Grid/Gride"
 // import "./RunAudit.css";
 
@@ -50,7 +50,7 @@ function RunAudit() {
           </Grid>
 
           <Grid item xs={12}>
-            <Progress percent={0} />
+            <ProgressBar percent={0} />
           </Grid>
         </Grid>
       </div>

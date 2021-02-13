@@ -6,14 +6,19 @@ import Progress from "../ProgressBar/ProgressBar";
 import SaveContinue from "../SaveContinue/SaveContinue";
 // import "./ChooseControls.css";
 
-function ChooseControls() {
+function ChooseControls(props) {
+  console.log(props.connectedSystems);
+  
   return (
     <div>
       <Header to={"/connectSystems"} />
       <h1>Choose Controls</h1>
-      <main>ERP CRM ...</main>
+      {/* {props.connectedSystems.map((system) => {
+        return <div key={system}>{system}</div>;
+      })} */}
+
       <Progress percent={66} />
-      <SaveContinue to={"/assignControlsOwners"}/>
+      <SaveContinue to={"/assignControlsOwners"} />
     </div>
   );
 }

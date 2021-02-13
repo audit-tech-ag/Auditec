@@ -28,12 +28,38 @@ function ConnectedSystem(props) {
     checkedC: false,
     checkedD: false,
   });
+  // const [subSystemsSelected, setSubSystemsSelected] = useState({});
+  const [systemsAndSubSystems, setSystemsAndSubSystems] = useState();
 
   const classes = useStyles();
 
   function handleChange(event) {
     setState({ ...state, [event.target.name]: event.target.checked });
+    console.log(state);
+
+    if (event.target.checked) {
+      setSystemsAndSubSystems({
+        ...systemsAndSubSystems,
+        [props.systemName]: event.target.value,
+      });
+    }
+    if (!event.target.checked) {
+      for (let element in systemsAndSubSystems) {
+        if (
+          systemsAndSubSystems.hasOwnProperty(element) &&
+          systemsAndSubSystems[element] == event.target.value
+        ) {
+          setSystemsAndSubSystems(delete systemsAndSubSystems[element]);
+        }
+      }
+      // setSubSystemsSelected();
+    }
+    //  props.onSubmitChange(subSystemsSelected);
+    // setSystemsAndSubSystems(...systemsAndSubSystems, )
   }
+  console.log(systemsAndSubSystems);
+
+  // props.onSubmitChange(subSystemsSelected);
 
   return (
     <div className={classes.root} id={props.systemName}>

@@ -27,12 +27,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ConnectSystems() {
-  const [systemToRender, setSystemToRender] = useState([]);
+function ConnectSystems({ onPageSubmitChange }) {
+  const [systemsToRender, setsystemsToRender] = useState([]);
+  // const [systemsAndSubSystems, setSystemsAndSubSystems] = useState();
 
   function onChange(systems) {
-    setSystemToRender(systems);
+    // console.log(systems);
+    setsystemsToRender(systems);
   }
+
+  function onSubmitChange(subSystems) {
+    console.log(subSystems);
+    // setSystemsAndSubSystems({ ...systemsAndSubSystems, subSystems });
+  }
+    // onPageSubmitChange(systemsAndSubSystems);
+
+  // console.log(systemsAndSubSystems);
 
   const classes = useStyles();
 
@@ -58,8 +68,14 @@ function ConnectSystems() {
                 justify="flex-start"
                 alignItems="flex-start"
               >
-                {systemToRender.map((system) => {
-                  return <ConnectedSystem systemName={system} />;
+                {systemsToRender.map((system) => {
+                  return (
+                    <ConnectedSystem
+                      key={system}
+                      systemName={system}
+                      onSubmitChange={onSubmitChange}
+                    />
+                  );
                 })}
               </Grid>
             </Grid>
