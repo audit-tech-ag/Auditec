@@ -16,7 +16,16 @@ function App() {
     setConnectedSystems((prevState) => [...prevState, systemsAndSubSystems]);
   }
 
-  console.log(connectedSystems);
+  function onPageSubmitDelete(subSystemDelete) {
+    setConnectedSystems((prevState) =>
+      prevState.filter(
+        (subSystem) =>
+          JSON.stringify(subSystem) !== JSON.stringify(subSystemDelete)
+      )
+    );
+  }
+
+  // console.log(connectedSystems);
 
   return (
     <div>
@@ -27,7 +36,10 @@ function App() {
           path="/connectSystems"
           exact
           render={() => (
-            <ConnectSystems onPageSubmitChange={onPageSubmitChange} />
+            <ConnectSystems
+              onPageSubmitChange={onPageSubmitChange}
+              onPageSubmitDelete={onPageSubmitDelete}
+            />
           )}
         />
         <Route

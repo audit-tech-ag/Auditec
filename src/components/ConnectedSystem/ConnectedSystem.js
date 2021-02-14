@@ -37,24 +37,24 @@ function ConnectedSystem(props) {
 
   function handleChange(event) {
     setState({ ...state, [event.target.name]: event.target.checked });
-    let subSystemSave = {};
+    let subSystemSave = { [props.systemName]: event.target.value };
 
     if (event.target.checked) {
-      subSystemSave = { [props.systemName]: event.target.value };
       setSystemsAndSubSystems((prevState) => [...prevState, subSystemSave]);
+      props.onSubmit(subSystemSave);
     }
+
     if (!event.target.checked) {
-      for (let element in systemsAndSubSystems) {
-        if (
-          systemsAndSubSystems.hasOwnProperty(element) &&
-          systemsAndSubSystems[element] == event.target.value
-        ) {
-          setSystemsAndSubSystems(delete systemsAndSubSystems[element]);
-        }
-      }
+      setSystemsAndSubSystems((prevState) =>
+        prevState.filter(
+          (subSystem) =>
+            JSON.stringify(subSystem) !== JSON.stringify(subSystemSave)
+        )
+      );
+      props.onDelete(subSystemSave);
     }
-    props.onSubmit(subSystemSave);
   }
+  // console.log(systemsAndSubSystems);
 
   return (
     <div className={classes.root} id={props.systemName}>

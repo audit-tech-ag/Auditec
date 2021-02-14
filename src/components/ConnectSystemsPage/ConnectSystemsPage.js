@@ -11,7 +11,6 @@ import SaveContinue from "../SaveContinue/SaveContinue";
 import SystemList from "../SystemsList/SystemList";
 import ConnectedSystem from "../ConnectedSystem/ConnectedSystem";
 
-
 // import "./ConnectSystems.css";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,9 +27,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ConnectSystems({ onPageSubmitChange }) {
+function ConnectSystems(props) {
   const [systemsToRender, setsystemsToRender] = useState([]);
   const [systemsAndSubSystems, setSystemsAndSubSystems] = useState([]);
+  
+  const classes = useStyles();
 
   function onListChange(systems) {
     setsystemsToRender(systems);
@@ -39,11 +40,20 @@ function ConnectSystems({ onPageSubmitChange }) {
   function onSubmit(subSystems) {
     let subSystemsToSave = subSystems;
 
-    setSystemsAndSubSystems((prevState) => [...prevState, { subSystems }]);
-    onPageSubmitChange(subSystemsToSave);
+    setSystemsAndSubSystems((prevState) => [...prevState, subSystems]);
+    props.onPageSubmitChange(subSystemsToSave);
   }
 
-  const classes = useStyles();
+  function onDelete(subSystemDelete) {
+    let subSystemsToDelete = subSystemDelete;
+    setSystemsAndSubSystems((prevState) =>
+      prevState.filter(
+        (subSystem) =>
+          JSON.stringify(subSystem) !== JSON.stringify(subSystemsToDelete)
+      )
+    );
+    props.onPageSubmitDelete(subSystemsToDelete);
+  }
 
   return (
     <div>
@@ -73,6 +83,7 @@ function ConnectSystems({ onPageSubmitChange }) {
                       key={system}
                       systemName={system}
                       onSubmit={onSubmit}
+                      onDelete={onDelete}
                     />
                   );
                 })}
