@@ -26,7 +26,7 @@ function Header(props) {
         <Grid container spacing={8}>
           <Grid item xs={6}>
             <h1>AudiTech</h1>
-            <h>As audit should be</h>
+            <h3>As audit should be</h3>
           </Grid>
           <Grid item xs={6}>
             <Link to={props.to}>
